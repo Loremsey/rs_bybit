@@ -22,8 +22,8 @@ impl MarketData {
     /// * `category` - The market category for which to retrieve klines (optional).
     /// * `symbol` - The trading pair or symbol for which to retrieve klines.
     /// * `interval` - The time interval between klines.
-    /// * `start` - The start date for the kline data retrieval in `DDMMYY` format (optional).
-    /// * `end` - The end date for the kline data retrieval in `DDMMYY` format (optional).
+    /// * `start` - The start time for the kline data retrieval as a Unix timestamp in milliseconds (optional).
+    /// * `end` - The end time for the kline data retrieval as a Unix timestamp in milliseconds (optional).
     /// * `limit` - The maximum number of klines to return (optional).
     ///
     /// # Returns
@@ -42,17 +42,15 @@ impl MarketData {
         }
         parameters.insert("symbol".into(), req.symbol.into());
         parameters.insert("interval".into(), req.interval.into());
-        if let Some(start_str) = req.start.as_ref().map(|s| s.as_ref()) {
-            let start_millis = date_to_milliseconds(start_str);
+        if let Some(start) = req.start {
             parameters
                 .entry("start".to_owned())
-                .or_insert_with(|| start_millis.to_string());
+                .or_insert_with(|| start.to_string());
         }
-        if let Some(end_str) = req.end.as_ref().map(|s| s.as_ref()) {
-            let end_millis = date_to_milliseconds(end_str);
+        if let Some(end) = req.end {
             parameters
                 .entry("end".to_owned())
-                .or_insert_with(|| end_millis.to_string());
+                .or_insert_with(|| end.to_string());
         }
         if let Some(l) = req.limit {
             parameters
@@ -79,8 +77,8 @@ impl MarketData {
     /// * `category` - An optional category of the contract, if specified.
     /// * `symbol` - The trading pair or contract symbol.
     /// * `interval` - The interval between klines (e.g., "5m" for five minutes).
-    /// * `start` - An optional start time for filtering the data, formatted as "DDMMYY".
-    /// * `end` - An optional end time for filtering the data, formatted as "DDMMYY".
+    /// * `start` - An optional start time for filtering the data, as a Unix timestamp in milliseconds.
+    /// * `end` - An optional end time for filtering the data, as a Unix timestamp in milliseconds.
     /// * `limit` - An optional limit to the number of kline entries to be returned.
     ///
     /// # Returns
@@ -110,17 +108,15 @@ impl MarketData {
         }
         parameters.insert("symbol".into(), req.symbol.into());
         parameters.insert("interval".into(), req.interval.into());
-        if let Some(start_str) = req.start.as_ref().map(|s| s.as_ref()) {
-            let start_millis = date_to_milliseconds(start_str);
+        if let Some(start) = req.start {
             parameters
                 .entry("start".to_owned())
-                .or_insert_with(|| start_millis.to_string());
+                .or_insert_with(|| start.to_string());
         }
-        if let Some(end_str) = req.end.as_ref().map(|s| s.as_ref()) {
-            let end_millis = date_to_milliseconds(end_str);
+        if let Some(end) = req.end {
             parameters
                 .entry("end".to_owned())
-                .or_insert_with(|| end_millis.to_string());
+                .or_insert_with(|| end.to_string());
         }
 
         if let Some(l) = req.limit {
@@ -146,8 +142,8 @@ impl MarketData {
     /// * `category` - An optional `Category` determining the contract category.
     /// * `symbol` - The trading pair or symbol for the klines.
     /// * `interval` - The duration between individual klines.
-    /// * `start` - Optional start time for the kline data as a string slice.
-    /// * `end` - Optional end time for the kline data as a string slice.
+    /// * `start` - Optional start time for the kline data as a Unix timestamp in milliseconds.
+    /// * `end` - Optional end time for the kline data as a Unix timestamp in milliseconds.
     /// * `limit` - Optional maximum number of klines to return.
     ///
     /// # Returns
@@ -175,17 +171,15 @@ impl MarketData {
         }
         parameters.insert("symbol".into(), req.symbol.into());
         parameters.insert("interval".into(), req.interval.into());
-        if let Some(start_str) = req.start.as_ref().map(|s| s.as_ref()) {
-            let start_millis = date_to_milliseconds(start_str);
+        if let Some(start) = req.start {
             parameters
                 .entry("start".to_owned())
-                .or_insert_with(|| start_millis.to_string());
+                .or_insert_with(|| start.to_string());
         }
-        if let Some(end_str) = req.end.as_ref().map(|s| s.as_ref()) {
-            let end_millis = date_to_milliseconds(end_str);
+        if let Some(end) = req.end {
             parameters
                 .entry("end".to_owned())
-                .or_insert_with(|| end_millis.to_string());
+                .or_insert_with(|| end.to_string());
         }
 
         if let Some(l) = req.limit {
@@ -211,8 +205,8 @@ impl MarketData {
     ///
     /// * `symbol` - The trading pair or symbol for which the klines are to be retrieved.
     /// * `interval` - The duration between individual klines.
-    /// * `start` - Optional start time for the kline data.
-    /// * `end` - Optional end time for the kline data.
+    /// * `start` - Optional start time for the kline data as a Unix timestamp in milliseconds.
+    /// * `end` - Optional end time for the kline data as a Unix timestamp in milliseconds.
     /// * `limit` - Optional maximum number of klines to be returned.
     ///
     /// # Returns
@@ -231,17 +225,15 @@ impl MarketData {
         parameters.insert("category".to_owned(), Category::Linear.as_str().to_string());
         parameters.insert("symbol".into(), req.symbol.into());
         parameters.insert("interval".into(), req.interval.into());
-        if let Some(start_str) = req.start.as_ref().map(|s| s.as_ref()) {
-            let start_millis = date_to_milliseconds(start_str);
+        if let Some(start) = req.start {
             parameters
                 .entry("start".to_owned())
-                .or_insert_with(|| start_millis.to_string());
+                .or_insert_with(|| start.to_string());
         }
-        if let Some(end_str) = req.end.as_ref().map(|s| s.as_ref()) {
-            let end_millis = date_to_milliseconds(end_str);
+        if let Some(end) = req.end {
             parameters
                 .entry("end".to_owned())
-                .or_insert_with(|| end_millis.to_string());
+                .or_insert_with(|| end.to_string());
         }
         if let Some(l) = req.limit {
             parameters

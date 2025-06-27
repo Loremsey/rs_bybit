@@ -23,12 +23,12 @@ pub struct KlineRequest<'a> {
     /// The start time for the Kline data (Unix timestamp in milliseconds).
     ///
     /// Defines the beginning of the time range for the Kline data. For perpetual futures, this is useful for fetching historical data to backtest trading strategies. If unset, the API may return data from the most recent period, which may not suit historical analysis needs.
-    pub start: Option<Cow<'a, str>>,
+    pub start: Option<u64>,
 
     /// The end time for the Kline data (Unix timestamp in milliseconds).
     ///
     /// Defines the end of the time range for the Kline data. Bots should set this to limit the data to a specific period, especially for performance optimization when processing large datasets. If unset, the API typically returns data up to the current time.
-    pub end: Option<Cow<'a, str>>,
+    pub end: Option<u64>,
 
     /// The maximum number of Kline records to return (1-200, default: 200).
     ///
@@ -50,16 +50,16 @@ impl<'a> KlineRequest<'a> {
         category: Option<Category>,
         symbol: &'a str,
         interval: &'a str,
-        start: Option<&'a str>,
-        end: Option<&'a str>,
+        start: Option<u64>,
+        end: Option<u64>,
         limit: Option<u64>,
     ) -> KlineRequest<'a> {
         KlineRequest {
             category,
             symbol: Cow::Borrowed(symbol),
             interval: Cow::Borrowed(interval),
-            start: start.map(Cow::Borrowed),
-            end: end.map(Cow::Borrowed),
+            start,
+            end,
             limit,
         }
     }

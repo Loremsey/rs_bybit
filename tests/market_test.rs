@@ -15,8 +15,8 @@ mod tests {
             Some(Category::Linear),
             "ETHUSDT",
             "60",
-            Some("010124"),
-            Some("050224"),
+            Some(1704067200000),
+            Some(1707091200000),
             None,
         );
         let klines = market.get_klines(request).await;
@@ -32,8 +32,8 @@ mod tests {
             Some(Category::Linear),
             "ETHUSDT",
             "60",
-            Some("010124"),
-            Some("050224"),
+            Some(1704067200000),
+            Some(1707091200000),
             None,
         );
         let mark_klines = market.get_mark_price_klines(request).await;
@@ -49,8 +49,8 @@ mod tests {
             Some(Category::Linear),
             "ETHUSDT",
             "60",
-            Some("010124"),
-            Some("050224"),
+            Some(1704067200000),
+            Some(1707091200000),
             None,
         );
         let index_klines = market.get_index_price_klines(request).await;
@@ -66,8 +66,8 @@ mod tests {
             Some(Category::Linear),
             "ETHUSDT",
             "60",
-            Some("010124"),
-            Some("050224"),
+            Some(1704067200000),
+            Some(1707091200000),
             None,
         );
         let premium_klines = market.get_premium_index_price_klines(request).await;
