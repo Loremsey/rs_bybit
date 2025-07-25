@@ -462,7 +462,7 @@ impl Stream {
     }
     pub async fn ws_klines(
         &self,
-        subs: Vec<(&str, &str)>,
+        subs: Vec<(String, String)>,
         category: Category,
         sender: mpsc::UnboundedSender<WsKline>,
     ) -> Result<(), BybitError> {
